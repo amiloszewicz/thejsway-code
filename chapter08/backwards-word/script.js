@@ -1,7 +1,5 @@
 // https://github.com/bpesquet/thejsway/blob/master/manuscript/chapter08.md#backwards-word
 
-// https://github.com/bpesquet/thejsway/blob/master/manuscript/chapter08.md#vowel-count
-
 let word = prompt('Write down some random word');
 let vowelsCount = 0;
 const letters = word.split('');
