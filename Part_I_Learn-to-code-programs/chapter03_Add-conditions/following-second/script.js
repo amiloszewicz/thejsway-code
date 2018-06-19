@@ -1,74 +1,79 @@
 // https://github.com/bpesquet/thejsway/blob/master/manuscript/chapter03.md#following-second
 
-const digitCharacter = new RegExp(/\d/, 'gm');
-
 const showProgramInstruction = () => {
     alert('Following second program will show the time 1 second after your inputs. Have fun! :)');
 };
 
-const checkCorrectHoursValue = () => {
-    while (hours < 0 || hours > 24 || (!digitCharacter.test(hours))) {
-        if (hours < 0 || hours > 24) {
-            hours = Number(prompt('Enter hours between 1-24 you silly ;P'));
-        } else if (!digitCharacter.test(hours)) {
-            hours = Number(prompt('Please write hours with numbers, not words. Arigato ^^'));
-        } 
-    }  
+const enterHours = () => {
+    return prompt('Enter hours:');
 };
 
-const checkCorrectMinutesValue = () => {
-    while (minutes < 0 || minutes > 59 || (!digitCharacter.test(minutes))) {
+const enterMinutes = () => {
+    return prompt('Enter minutes:');
+};
+
+const enterSeconds = () => {
+    return prompt('Enter seconds:');
+};
+
+const checkCorrectHoursValue = (hours) => {
+    while (typeof hours !== 'number') {
+        hours = Number(hours);
+            if (hours < 0 || hours > 23) {
+                hours = prompt('Enter hours between 1-24 you silly ;P');
+            }
+    }
+    return hours;
+};
+
+const checkCorrectMinutesValue = (minutes) => {
+    while (typeof minutes !== 'number'){
+        minutes = Number(minutes);
         if (minutes < 0) {
-            minutes = Number(prompt('Are we backing in time?! :O If not...try more than 0 ;) (trust me)'));
+            minutes = prompt('Are we backing in time?! :O If not...try more than 0 ;) (trust me)');
         } else if (minutes > 59) {
-            minutes = Number(prompt('Do you know some minutes higher than 59?! How?! Teach me!... or try again c;'));
-        } else if (!digitCharacter.test(minutes)) {
-            minutes = Number(prompt('Numbers! YOU USE NUMBERs. like: 1, 14 sometimes 69 ^^'));
+            minutes = prompt('Do you know some min higher than 59?! How?! Teach me!... or try again c;');
         }
     }
+    return minutes;
 };
 
-const checkCorrectSecondsValue = () => {
-    while (seconds < 0 || seconds > 59 || (!digitCharacter.test(seconds))) {
+const checkCorrectSecondsValue = (seconds) => {
+    while (typeof seconds !== 'number') {
+        seconds = Number(seconds);
         if (seconds < 0) {
-            seconds = Number(prompt('Seconds are fast, but not negative, try 1 +'));
+            seconds = prompt('Seconds are fast, but not negative, try 1 +');
         } else if (seconds > 59) {
-            seconds = Number(prompt('Hold on. Too much, try a ittle bit less, like 59 max, ok??'));
-        } else if ((!digitCharacter.test(seconds))) {
-            seconds = Number(prompt('Seconds value should be write with these characters: '/0, 1, 2, 3, 4, 5, 6, 7, 8, 9/''));
+            seconds = prompt('Hold on. Too much, try a ittle bit less, like 59 max, ok??');
         }
     }
+    return seconds;
 };
 
-const setTimeOneSecondLater = () => {
+const setTimeOneSecondLater = (hoursVal, minutesVal, secondsVal) => {
     let time = {
         hours: 0,
         minutes: 0,
         seconds: 0
     };
 
-    if (seconds === 59 && minutes === 59) {
-        time.seconds = 0;
-        time.minutes = 0;
-        if (hours === 24) {
-            time.hours = 0;
-        } else {
-            time.hours = ++hours;
-        }
-    } else if (seconds=== 59) {
-        time.seconds = 0;
-        time.minutes = ++minutes;
-    } else if (minutes === 59) {
-        time.minutes = 0;
-        time.hours = ++hours;
-    } else if (hours === 24) {
+    if (hoursVal === 23 && minutesVal === 59 && secondsVal === 59) {
         time.hours = 0;
+        time.minutes = 0;
+        time.seconds = 0;
+    } else if (minutesVal === 59 && secondsVal === 59) {
+        time.hours = hoursVal + 1;
+        time.minutes = 0;
+        time.seconds = 0;
+    } else if (secondsVal === 59) {
+        time.hours = hoursVal;
+        time.minutes = minutesVal + 1;
+        time.seconds = 0;
     } else {
-        time.seconds = ++seconds;
-        time.minutes = ++minutes;
-        time.hours = ++hours;
+        time.hours = hoursVal;
+        time.minutes = minutesVal;
+        time.seconds = secondsVal + 1;
     }
-    
     return time;
 };
 
@@ -76,12 +81,9 @@ const showTimeOneSecondLater = (time) => {
     alert(`${time.hours}h ${time.minutes}m ${time.seconds}s`);
 };
 
-
 showProgramInstruction();
-let hours = Number(prompt('Enter hours:'));
-checkCorrectHoursValue();
-let minutes = Number(prompt('Enter minutes:'));
-checkCorrectMinutesValue();
-let seconds = Number(prompt('Enter seconds:'));
-checkCorrectSecondsValue();
-showTimeOneSecondLater(setTimeOneSecondLater());
+showTimeOneSecondLater(
+    setTimeOneSecondLater(
+        checkCorrectHoursValue(enterHours()), checkCorrectMinutesValue(enterMinutes()), checkCorrectSecondsValue(enterSeconds())
+    )
+);
