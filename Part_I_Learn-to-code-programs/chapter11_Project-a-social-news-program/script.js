@@ -82,3 +82,5 @@ const removeLink = () => {
 const storeLinks = (link) => {
     linksArray.push(link);
 };
+
+menuOptions(showMenu());
