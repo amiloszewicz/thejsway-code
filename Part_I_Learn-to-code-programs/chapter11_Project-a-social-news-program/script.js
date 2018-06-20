@@ -33,3 +33,24 @@ const showLinks = () => {
         alert(linksList);
     }
 };
+
+const addLink = () => {
+    class link {
+        constructor(title, url, author) {
+            this.title = title;
+            this.url = url;
+            this.author = author;
+        }
+    }
+
+    const newLink = new link;
+
+    newLink.title = prompt('Enter links title');
+    newLink.url = prompt('Enter links url');
+    if (newLink.url.indexOf('http://') || newLink.url.indexOf('https://')) {
+        newLink.url = 'http://' + newLink.url;
+    }
+    newLink.author = prompt('Enter links author');
+
+    return newLink;
+};
