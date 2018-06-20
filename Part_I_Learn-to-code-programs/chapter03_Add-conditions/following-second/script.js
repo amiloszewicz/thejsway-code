@@ -18,21 +18,29 @@ const enterSeconds = () => {
 
 const checkCorrectHoursValue = (hours) => {
     while (typeof hours !== 'number') {
-        hours = Number(hours);
+        if (isNaN(hours)) {
+            hours = prompt('Please write hours with numbers, not words. Arigato ^^');
+        } else {
+            hours = Number(hours);
             if (hours < 0 || hours > 23) {
-                hours = prompt('Enter hours between 1-24 you silly ;P');
+                hours = prompt('Enter hours between 1-23 you silly ;P');
             }
+        }
     }
     return hours;
 };
 
 const checkCorrectMinutesValue = (minutes) => {
     while (typeof minutes !== 'number'){
-        minutes = Number(minutes);
-        if (minutes < 0) {
-            minutes = prompt('Are we backing in time?! :O If not...try more than 0 ;) (trust me)');
-        } else if (minutes > 59) {
-            minutes = prompt('Do you know some min higher than 59?! How?! Teach me!... or try again c;');
+        if (isNaN(minutes)) {
+            minutes = prompt('Numbers! YOU USE NUMBERs. like: 1, 14 sometimes 69 ^^');
+        } else {
+            minutes = Number(minutes);
+            if (minutes < 0) {
+                minutes = prompt('Are we backing in time?! :O If not...try more than 0 ;) (trust me)');
+            } else if (minutes > 59) {
+                minutes = prompt('Do you know some min higher than 59?! How?! Teach me!... or try again c;');
+            }
         }
     }
     return minutes;
@@ -40,11 +48,15 @@ const checkCorrectMinutesValue = (minutes) => {
 
 const checkCorrectSecondsValue = (seconds) => {
     while (typeof seconds !== 'number') {
-        seconds = Number(seconds);
-        if (seconds < 0) {
-            seconds = prompt('Seconds are fast, but not negative, try 1 +');
-        } else if (seconds > 59) {
-            seconds = prompt('Hold on. Too much, try a ittle bit less, like 59 max, ok??');
+        if (isNaN(seconds)) {
+            seconds = prompt('Seconds value should be write with these characters: \n"0, 1, 2, 3, 4, 5, 6, 7, 8, 9"');
+        } else {
+            seconds = Number(seconds);
+            if (seconds < 0) {
+                seconds = prompt('Seconds are fast, but not negative, try 1 +');
+            } else if (seconds > 59) {
+                seconds = prompt('Hold on. Too much, try a ittle bit less, like 59 max, ok??');
+            }
         }
     }
     return seconds;
