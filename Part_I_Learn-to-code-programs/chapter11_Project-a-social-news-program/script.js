@@ -78,3 +78,7 @@ const removeLink = () => {
         linksArray.splice( linksArray[indexLinkToRemove - 1], 1 );
     }
 };
+
+const storeLinks = (link) => {
+    linksArray.push(link);
+};
