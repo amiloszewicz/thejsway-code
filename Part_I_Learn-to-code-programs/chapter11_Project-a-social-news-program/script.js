@@ -24,3 +24,12 @@ const menuOptions = (option) => {
             menuOptions(showMenu());
     }
 };
+
+const showLinks = () => {
+    if (linksArray == 0) {
+        alert(`Zero links`);
+    } else {
+        const linksList = linksArray.map(link => (`${linksArray.indexOf(link) + 1} : ${link.title} (${link.url}). Author: ${link.author}`)).join('\n');
+        alert(linksList);
+    }
+};
