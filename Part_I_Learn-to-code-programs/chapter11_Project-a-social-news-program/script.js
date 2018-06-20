@@ -1,5 +1,7 @@
 // https://github.com/bpesquet/thejsway/blob/master/manuscript/chapter11.md#objective
 
+let linksArray = [];
+
 const showMenu = () => {
     return prompt(`Choose an option:\n1 : Show links\n2 : Add a link\n3 : Remove a link\n0 : Quit`);
 };
@@ -53,4 +55,26 @@ const addLink = () => {
     newLink.author = prompt('Enter links author');
 
     return newLink;
+};
+
+const removeLink = () => {
+    const lastLinkPosition = linksArray.length;
+
+    if (linksArray == 0) {
+         alert(`Zero links to be removed`);
+    } else {
+        let indexLinkToRemove = prompt(`Enter the index of the link to be removed (between 1 and ${lastLinkPosition})`);
+
+        while (typeof indexLinkToRemove !== 'number') {
+            if (isNaN(indexLinkToRemove)) {
+                indexLinkToRemove = prompt(`Enter the index of the link to be removed (between 1 and ${lastLinkPosition})`);
+            } else {
+                indexLinkToRemove = Number(indexLinkToRemove);
+                if (indexLinkToRemove > lastLinkPosition || indexLinkToRemove < 1) {
+                    indexLinkToRemove = prompt(`Enter the index of the link to be removed (between 1 and ${lastLinkPosition})`);
+                }
+            }
+        }
+        linksArray.splice( linksArray[indexLinkToRemove - 1], 1 );
+    }
 };
