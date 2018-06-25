@@ -2,24 +2,15 @@
 
 const addDessertButton = document.getElementById(`addButton`);
 const dessertList = document.getElementById(`desserts`);
-const dessertElement = document.createElement(`li`);
-    
 
 const addDessert = () => {
     const chooseDessert = prompt(`Add a dessert`);
+    const dessertElement = document.createElement(`li`);
     
     dessertElement.innerText = chooseDessert;
-    dessertElement.id = chooseDessert;
+    dessertElement.contentEditable = true;
 
     dessertList.appendChild(dessertElement);
 };
 
 addDessertButton.addEventListener(`click`, addDessert);
-
-const dessertToEdit = document.getElementById(dessertElement.id);
-
-const a = () => {
-    console.log(`a`);
-};
-
-dessertToEdit.addEventListener(`click`, a);
